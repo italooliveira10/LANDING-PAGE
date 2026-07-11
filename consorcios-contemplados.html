@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="tituloAba">Cartas Contempladas — Use seu crédito agora, sem sorteio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --verde-cofre:#0E3B2E;
+    --verde-musgo:#154335;
+    --dourado:#C9A227;
+    --dourado-claro:#E4C55C;
+    --marfim:#F6F1E7;
+    --marfim-2:#EFE8D8;
+    --grafite:#17211B;
+    --branco:#FFFFFF;
+    --verde-linha: rgba(14,59,46,0.12);
+
+    --f-display: 'Space Grotesk', sans-serif;
+    --f-texto: 'Inter', sans-serif;
+    --f-dados: 'IBM Plex Mono', monospace;
+
+    --raio: 14px;
+    --sombra: 0 20px 50px -20px rgba(14,59,46,0.35);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--f-texto); color:var(--grafite); background:var(--marfim); line-height:1.5; -webkit-font-smoothing:antialiased;}
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  button{font-family:inherit; cursor:pointer;}
+  .container{width:100%; max-width:1180px; margin:0 auto; padding:0 24px;}
+  .eyebrow{font-family:var(--f-dados); text-transform:uppercase; letter-spacing:.14em; font-size:.72rem; color:var(--dourado);}
+  h1,h2,h3{font-family:var(--f-display); line-height:1.08; font-weight:600;}
+  h1{font-size:clamp(2.3rem,5vw,3.6rem); letter-spacing:-0.01em;}
+  h2{font-size:clamp(1.8rem,3.4vw,2.5rem); letter-spacing:-0.01em;}
+  h3{font-size:1.2rem;}
+  p{color:#3B463F;}
+  .btn{display:inline-flex; align-items:center; gap:10px; padding:14px 26px; border-radius:999px; font-weight:600; font-size:.95rem; border:1px solid transparent; transition:transform .18s ease, box-shadow .18s ease, background .18s ease;}
+  .btn:focus-visible{outline:3px solid var(--dourado); outline-offset:3px;}
+  .btn-primario{background:var(--dourado); color:var(--verde-cofre);}
+  .btn-primario:hover{transform:translateY(-2px); box-shadow:0 12px 24px -10px rgba(201,162,39,.6);}
+  .btn-secundario{background:transparent; color:var(--marfim); border-color:rgba(246,241,231,.35);}
+  .btn-secundario:hover{background:rgba(246,241,231,.1); transform:translateY(-2px);}
+  .btn-outline-escuro{background:transparent; color:var(--verde-cofre); border-color:var(--verde-cofre);}
+  .btn-outline-escuro:hover{background:var(--verde-cofre); color:var(--marfim);}
+
+  header{position:sticky; top:0; z-index:50; background:rgba(14,59,46,.92); backdrop-filter:blur(8px); border-bottom:1px solid rgba(246,241,231,.08);}
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:16px 0;}
+  .logo{display:flex; align-items:center; gap:10px; font-family:var(--f-display); font-weight:700; color:var(--marfim); font-size:1.05rem;}
+  .logo-mark{width:34px; height:34px; border-radius:8px; background:linear-gradient(155deg,var(--dourado-claro),var(--dourado)); display:flex; align-items:center; justify-content:center; color:var(--verde-cofre); font-weight:700; font-size:.95rem;}
+  .nav-links{display:flex; gap:28px; align-items:center;}
+  .nav-links a{color:var(--marfim); font-size:.92rem; opacity:.85; transition:opacity .15s;}
+  .nav-links a:hover{opacity:1;}
+  .nav-cta{display:flex; align-items:center; gap:14px;}
+  .menu-toggle{display:none; background:none; border:none; color:var(--marfim); font-size:1.5rem;}
+  @media(max-width:840px){
+    .nav-links{position:absolute; top:100%; left:0; right:0; background:var(--verde-cofre); flex-direction:column; padding:18px 24px; gap:16px; display:none; border-bottom:1px solid rgba(246,241,231,.08);}
+    .nav-links.aberto{display:flex;}
+    .menu-toggle{display:block;}
+    .nav-cta .btn-secundario{display:none;}
+  }
+
+  .hero{background:radial-gradient(120% 140% at 15% 0%, var(--verde-musgo), var(--verde-cofre) 60%); color:var(--marfim); padding:76px 0 90px; position:relative; overflow:hidden;}
+  .hero::after{content:""; position:absolute; inset:0; background-image:radial-gradient(rgba(246,241,231,.06) 1px, transparent 1px); background-size:22px 22px; opacity:.5; pointer-events:none;}
+  .hero-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center; position:relative; z-index:1;}
+  @media(max-width:920px){.hero-grid{grid-template-columns:1fr; text-align:center;}}
+  .hero h1{margin:14px 0 18px;}
+  .hero h1 em{font-style:normal; color:var(--dourado-claro);}
+  .hero p.lead{max-width:520px; color:rgba(246,241,231,.82); font-size:1.05rem; margin-bottom:30px;}
+  @media(max-width:920px){.hero p.lead{margin-left:auto; margin-right:auto;}}
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:38px;}
+  @media(max-width:920px){.hero-ctas{justify-content:center;}}
+  .stat-row{display:flex; gap:28px; flex-wrap:wrap;}
+  @media(max-width:920px){.stat-row{justify-content:center;}}
+  .stat{font-family:var(--f-dados);}
+  .stat b{display:block; font-size:1.4rem; color:var(--dourado-claro); font-family:var(--f-display);}
+  .stat span{font-size:.76rem; color:rgba(246,241,231,.65); text-transform:uppercase; letter-spacing:.08em;}
+
+  .carta{position:relative; margin:0 auto; max-width:400px; background:linear-gradient(160deg,#fffdf7,var(--marfim-2)); border-radius:18px; padding:26px 24px 22px; border:1px solid rgba(201,162,39,.5); box-shadow:var(--sombra); transform:rotate(3deg); color:var(--grafite);}
+  .carta::before{content:""; position:absolute; inset:8px; border:1px dashed rgba(14,59,46,.25); border-radius:12px; pointer-events:none;}
+  .carta-top{display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:18px;}
+  .carta-selo{width:46px; height:46px; border-radius:50%; background:conic-gradient(from 180deg, var(--dourado), var(--dourado-claro), var(--dourado)); display:flex; align-items:center; justify-content:center; font-family:var(--f-display); font-weight:700; color:var(--verde-cofre); font-size:.75rem;}
+  .carta-label{font-family:var(--f-dados); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:#6b7268;}
+  .carta-valor{font-family:var(--f-display); font-size:2.1rem; font-weight:700; color:var(--verde-cofre); margin:2px 0 16px;}
+  .carta-linha{display:flex; justify-content:space-between; font-family:var(--f-dados); font-size:.78rem; padding:8px 0; border-top:1px solid rgba(14,59,46,.1);}
+  .carta-linha span:first-child{color:#6b7268;}
+  .carta-status{margin-top:16px; display:inline-flex; align-items:center; gap:7px; background:rgba(14,59,46,.08); color:var(--verde-cofre); padding:7px 14px; border-radius:999px; font-size:.75rem; font-weight:600;}
+  .carta-status .ponto{width:7px; height:7px; border-radius:50%; background:#2f9e6f;}
+
+  section{padding:88px 0;}
+  .head-secao{max-width:640px; margin-bottom:52px;}
+  .head-secao h2{margin-top:10px;}
+  .head-secao p{margin-top:14px; font-size:1.02rem;}
+
+  .grid-beneficios{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  @media(max-width:900px){.grid-beneficios{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:600px){.grid-beneficios{grid-template-columns:1fr;}}
+  .card-beneficio{background:var(--branco); border:1px solid var(--verde-linha); border-radius:var(--raio); padding:28px 24px; transition:transform .2s ease, box-shadow .2s ease;}
+  .card-beneficio:hover{transform:translateY(-4px); box-shadow:0 18px 34px -22px rgba(14,59,46,.35);}
+  .icone-b{width:44px; height:44px; border-radius:10px; margin-bottom:16px; background:var(--verde-cofre); color:var(--dourado-claro); display:flex; align-items:center; justify-content:center; font-size:1.2rem;}
+  .card-beneficio h3{margin-bottom:8px;}
+  .card-beneficio p{font-size:.94rem;}
+
+  .como-funciona{background:var(--verde-cofre); color:var(--marfim);}
+  .como-funciona .head-secao p{color:rgba(246,241,231,.78);}
+  .passos{display:grid; grid-template-columns:repeat(5,1fr); gap:18px;}
+  @media(max-width:980px){.passos{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.passos{grid-template-columns:1fr;}}
+  .passo{background:rgba(246,241,231,.05); border:1px solid rgba(246,241,231,.12); border-radius:var(--raio); padding:22px 18px; position:relative;}
+  .passo-num{font-family:var(--f-dados); color:var(--dourado-claro); font-size:.8rem; margin-bottom:14px; display:block;}
+  .passo h3{font-size:1rem; margin-bottom:8px;}
+  .passo p{font-size:.86rem; color:rgba(246,241,231,.7);}
+
+  .simulador-wrap{display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;}
+  @media(max-width:900px){.simulador-wrap{grid-template-columns:1fr;}}
+  .painel-sim{background:var(--branco); border:1px solid var(--verde-linha); border-radius:18px; padding:32px; box-shadow:var(--sombra);}
+  .campo{margin-bottom:24px;}
+  .campo label{display:flex; justify-content:space-between; font-size:.85rem; font-weight:600; margin-bottom:10px;}
+  .campo label span{font-family:var(--f-dados); color:var(--verde-cofre); font-weight:600;}
+  input[type="range"]{width:100%; accent-color:var(--dourado); height:6px;}
+  .select-prazo{display:flex; gap:10px; flex-wrap:wrap;}
+  .chip-prazo{padding:9px 16px; border-radius:999px; border:1px solid var(--verde-linha); font-size:.85rem; font-weight:600; background:var(--marfim);}
+  .chip-prazo[aria-pressed="true"]{background:var(--verde-cofre); color:var(--marfim); border-color:var(--verde-cofre);}
+  .chip-prazo:focus-visible{outline:3px solid var(--dourado); outline-offset:2px;}
+  .resultado-sim{margin-top:6px; padding-top:22px; border-top:1px dashed var(--verde-linha); display:flex; justify-content:space-between; align-items:flex-end;}
+  .resultado-sim .rot{font-size:.78rem; text-transform:uppercase; letter-spacing:.08em; color:#6b7268; font-family:var(--f-dados);}
+  .resultado-sim .num{font-family:var(--f-display); font-size:2.1rem; color:var(--verde-cofre); font-weight:700;}
+  .sim-nota{font-size:.75rem; color:#8a8f88; margin-top:14px;}
+
+  .grid-depo{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  @media(max-width:900px){.grid-depo{grid-template-columns:1fr; max-width:520px; margin:0 auto;}}
+  .card-depo{background:var(--branco); border:1px solid var(--verde-linha); border-radius:var(--raio); padding:26px 22px;}
+  .estrelas{color:var(--dourado); letter-spacing:2px; margin-bottom:14px; font-size:.9rem;}
+  .card-depo p.fala{font-size:.94rem; color:var(--grafite); margin-bottom:18px;}
+  .depo-autor{display:flex; align-items:center; gap:10px;}
+  .avatar-letra{width:38px; height:38px; border-radius:50%; background:var(--verde-cofre); color:var(--dourado-claro); display:flex; align-items:center; justify-content:center; font-family:var(--f-display); font-weight:700; font-size:.9rem;}
+  .depo-autor b{display:block; font-size:.88rem;}
+  .depo-autor span{font-size:.76rem; color:#6b7268;}
+
+  .faq-lista{max-width:760px;}
+  .faq-item{border-bottom:1px solid var(--verde-linha);}
+  .faq-pergunta{width:100%; background:none; border:none; text-align:left; display:flex; justify-content:space-between; align-items:center; padding:22px 4px; font-family:var(--f-display); font-size:1.02rem; color:var(--grafite);}
+  .faq-pergunta:focus-visible{outline:3px solid var(--dourado); outline-offset:-2px;}
+  .faq-plus{font-size:1.3rem; color:var(--dourado); transition:transform .25s ease; flex:none; margin-left:16px;}
+  .faq-item[data-aberto="true"] .faq-plus{transform:rotate(45deg);}
+  .faq-resposta{max-height:0; overflow:hidden; transition:max-height .3s ease;}
+  .faq-resposta p{padding:0 4px 20px; font-size:.94rem; max-width:640px;}
+
+  .cta-final{background:linear-gradient(135deg,var(--verde-cofre),var(--verde-musgo)); color:var(--marfim); text-align:center; border-radius:24px; padding:64px 32px; max-width:1132px; margin:0 auto;}
+  .cta-final h2{margin-bottom:14px;}
+  .cta-final p{color:rgba(246,241,231,.8); max-width:520px; margin:0 auto 30px;}
+  .cta-final .hero-ctas{justify-content:center;}
+
+  .insta-strip{background:var(--marfim-2);}
+  .insta-head{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px; margin-bottom:30px;}
+  .insta-head .btn{white-space:nowrap;}
+  .grid-insta{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+  @media(max-width:760px){.grid-insta{grid-template-columns:repeat(2,1fr);}}
+  .insta-tile{aspect-ratio:1/1; border-radius:12px; overflow:hidden; position:relative; background:linear-gradient(150deg,var(--verde-musgo),var(--verde-cofre)); display:flex; align-items:center; justify-content:center; color:rgba(246,241,231,.6); font-size:1.6rem;}
+  .insta-tile span{position:absolute; bottom:10px; left:12px; font-family:var(--f-dados); font-size:.68rem; color:rgba(246,241,231,.75);}
+
+  footer{background:var(--verde-cofre); color:rgba(246,241,231,.75); padding:56px 0 28px;}
+  .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px; margin-bottom:44px;}
+  @media(max-width:760px){.footer-grid{grid-template-columns:1fr; gap:32px;}}
+  .footer-grid h4{color:var(--marfim); font-family:var(--f-display); font-size:.95rem; margin-bottom:16px;}
+  .footer-grid li{margin-bottom:10px; font-size:.9rem;}
+  .footer-grid a:hover{color:var(--dourado-claro);}
+  .footer-baixo{border-top:1px solid rgba(246,241,231,.12); padding-top:22px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-size:.78rem; color:rgba(246,241,231,.5);}
+
+  .flutuante{position:fixed; right:22px; bottom:22px; z-index:60; width:58px; height:58px; border-radius:50%; background:#25D366; color:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 14px 28px -10px rgba(0,0,0,.35); font-size:1.5rem;}
+  .flutuante:hover{transform:scale(1.06);}
+  .flutuante:focus-visible{outline:3px solid var(--dourado); outline-offset:3px;}
+
+  @media (prefers-reduced-motion: reduce){*{transition:none !important; animation:none !important; scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a href="#topo" class="logo"><span class="logo-mark" id="logoIniciais">CC</span><span id="navNomeEmpresa"></span></a>
+    <nav class="nav-links" id="menuLinks">
+      <a href="#beneficios">Benefícios</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#simulador">Simulador</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#faq">Dúvidas</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#simulador" class="btn btn-secundario">Simular agora</a>
+      <a id="linkWhatsappHeader" href="#" target="_blank" class="btn btn-primario">Falar no WhatsApp</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="topo">
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow" id="heroEyebrow"></span>
+        <h1 id="heroTitulo"></h1>
+        <p class="lead" id="heroSubtitulo"></p>
+        <div class="hero-ctas">
+          <a id="linkWhatsappHero" href="#" target="_blank" class="btn btn-primario" id="heroCtaPrimarioTexto"></a>
+          <a href="#como-funciona" class="btn btn-secundario" id="heroCtaSecundarioTexto"></a>
+        </div>
+        <div class="stat-row" id="heroStats"></div>
+      </div>
+
+      <div class="carta" aria-hidden="true">
+        <div class="carta-top">
+          <div>
+            <span class="carta-label" id="cartaLabel"></span>
+            <div class="carta-valor" id="cartaValor"></div>
+          </div>
+          <div class="carta-selo" id="cartaSelo"></div>
+        </div>
+        <div class="carta-linha"><span id="cartaLinha1Label"></span><span id="cartaLinha1Valor"></span></div>
+        <div class="carta-linha"><span id="cartaLinha2Label"></span><span id="cartaLinha2Valor"></span></div>
+        <div class="carta-linha"><span id="cartaLinha3Label"></span><span id="cartaLinha3Valor"></span></div>
+        <div class="carta-status"><span class="ponto"></span> <span id="cartaStatusTexto"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="beneficios">
+    <div class="container">
+      <div class="head-secao">
+        <span class="eyebrow" id="beneficiosEyebrow"></span>
+        <h2 id="beneficiosTitulo"></h2>
+        <p id="beneficiosTexto"></p>
+      </div>
+      <div class="grid-beneficios" id="gridBeneficios"></div>
+    </div>
+  </section>
+
+  <section id="como-funciona" class="como-funciona">
+    <div class="container">
+      <div class="head-secao">
+        <span class="eyebrow" id="passosEyebrow"></span>
+        <h2 id="passosTitulo"></h2>
+        <p id="passosTexto"></p>
+      </div>
+      <div class="passos" id="gridPassos"></div>
+    </div>
+  </section>
+
+  <section id="simulador">
+    <div class="container simulador-wrap">
+      <div>
+        <span class="eyebrow" id="simEyebrow"></span>
+        <h2 id="simTitulo"></h2>
+        <p id="simTexto"></p>
+      </div>
+
+      <div class="painel-sim">
+        <div class="campo">
+          <label for="rangeValor"><span id="simLabelValor"></span> <span id="labelValor"></span></label>
+          <input type="range" id="rangeValor" min="20000" max="500000" step="5000" value="180000">
+        </div>
+        <div class="campo">
+          <label id="simLabelPrazo"></label>
+          <div class="select-prazo" role="group" aria-label="Escolha do prazo em meses" id="gridPrazos"></div>
+        </div>
+        <div class="resultado-sim">
+          <div>
+            <div class="rot" id="simLabelResultado"></div>
+            <div class="num" id="resultadoParcela"></div>
+          </div>
+          <a id="linkWhatsappSim" href="#" target="_blank" class="btn btn-outline-escuro" id="simCtaTexto"></a>
+        </div>
+        <p class="sim-nota" id="simNota"></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="depoimentos" style="background:var(--marfim-2)">
+    <div class="container">
+      <div class="head-secao">
+        <span class="eyebrow" id="depoEyebrow"></span>
+        <h2 id="depoTitulo"></h2>
+      </div>
+      <div class="grid-depo" id="gridDepoimentos"></div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="container">
+      <div class="head-secao">
+        <span class="eyebrow" id="faqEyebrow"></span>
+        <h2 id="faqTitulo"></h2>
+      </div>
+      <div class="faq-lista" id="listaFaq"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="cta-final">
+      <span class="eyebrow" id="ctaFinalEyebrow"></span>
+      <h2 id="ctaFinalTitulo"></h2>
+      <p id="ctaFinalTexto"></p>
+      <div class="hero-ctas">
+        <a id="linkWhatsappCta" href="#" target="_blank" class="btn btn-primario" id="ctaFinalBotao1"></a>
+        <a id="linkInstagramCta" href="#" target="_blank" class="btn btn-secundario" id="ctaFinalBotao2"></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="insta-strip">
+    <div class="container">
+      <div class="insta-head">
+        <div>
+          <span class="eyebrow" id="instaEyebrow"></span>
+          <h2 style="margin-top:8px;" id="instaTitulo"></h2>
+        </div>
+        <a id="linkInstagramStrip" href="#" target="_blank" class="btn btn-outline-escuro" id="instaBotao"></a>
+      </div>
+      <!-- Placeholders visuais: troque por <img src="..."> quando tiver os posts reais -->
+      <div class="grid-insta" id="gridInsta"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4 id="footerNome"></h4>
+        <p style="max-width:320px; font-size:.88rem; color:rgba(246,241,231,.65);" id="footerDescricao"></p>
+      </div>
+      <div>
+        <h4 id="footerNavTitulo"></h4>
+        <ul>
+          <li><a href="#beneficios">Benefícios</a></li>
+          <li><a href="#como-funciona">Como funciona</a></li>
+          <li><a href="#simulador">Simulador</a></li>
+          <li><a href="#faq">Dúvidas frequentes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 id="footerContatoTitulo"></h4>
+        <ul>
+          <li id="footerTelefone"></li>
+          <li id="footerEmail"></li>
+          <li><a id="linkInstagramFooter" href="#" target="_blank">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-baixo">
+      <span id="footerCopy"></span>
+      <span id="footerAviso"></span>
+    </div>
+  </div>
+</footer>
+
+<a id="botaoFlutuante" class="flutuante" href="#" target="_blank" aria-label="Falar no WhatsApp">💬</a>
+
+<script>
+/* =====================================================================
+   EDITE SÓ AQUI. Tudo que aparece na página (textos, contatos, links,
+   números do simulador) vem deste único objeto. Troque os valores entre
+   aspas e salve o arquivo — não é preciso mexer em nenhum outro lugar.
+   ===================================================================== */
+const CONTEUDO = {
+
+  // ---- Identidade e contato ----
+  nomeEmpresa: "Cartas Contempladas",
+  iniciaisLogo: "CC",
+  tituloAba: "Cartas Contempladas — Use seu crédito agora, sem sorteio",
+  whatsappNumero: "5511999999999",           // DDI+DDD+número, só dígitos
+  whatsappMensagem: "Olá! Vi a página e quero simular uma carta contemplada.",
+  instagramUrl: "https://www.instagram.com/consorcioscontemplados_ath/",
+  telefoneExibicao: "(00) 00000-0000",
+  emailExibicao: "contato@seudominio.com.br",
+
+  // ---- Hero (topo da página) ----
+  heroEyebrow: "Consórcio já contemplado",
+  heroTituloHtml: "Sua carta contemplada<br><em>pronta pra usar</em>, sem esperar sorteio.",
+  heroSubtitulo: "Cartas de crédito contempladas para imóvel, carro, moto e serviços. Você usa o valor imediatamente, com parcelas que cabem no seu orçamento e total transparência em cada etapa.",
+  heroCtaPrimario: "Quero minha simulação",
+  heroCtaSecundario: "Como funciona",
+  heroStats: [
+    { numero: "+300", legenda: "cartas entregues" },
+    { numero: "R$ 40M+", legenda: "em crédito liberado" },
+    { numero: "4,9/5", legenda: "avaliação dos clientes" }
+  ],
+
+  // ---- Carta de crédito ilustrativa (visual do hero) ----
+  carta: {
+    label: "Carta de crédito",
+    valor: "R$ 180.000",
+    selo: "100%",
+    linha1: ["Categoria", "Imóvel"],
+    linha2: ["Prazo restante", "96 meses"],
+    linha3: ["Parcela estimada", "R$ 1.940"],
+    status: "Contemplada — disponível agora"
+  },
+
+  // ---- Benefícios ----
+  beneficiosEyebrow: "Por que consórcio contemplado",
+  beneficiosTitulo: "Crédito com a segurança do consórcio, sem a espera do sorteio.",
+  beneficiosTexto: "Cada carta é analisada antes de chegar até você — verificamos administradora, saldo devedor e condições, para que a transição seja simples e segura.",
+  beneficios: [
+    { icone: "✓", titulo: "Uso imediato", texto: "A carta já foi contemplada — você assume e usa o crédito sem entrar em fila de sorteio ou lance." },
+    { icone: "%", titulo: "Sem juros", texto: "Consórcio não tem juros bancários, apenas taxa de administração diluída nas parcelas." },
+    { icone: "🏠", titulo: "Para qualquer bem", texto: "Imóvel, carro, moto, maquinário ou serviços — a carta pode ser usada como entrada ou pagamento à vista." },
+    { icone: "🔒", titulo: "Transferência segura", texto: "Toda a documentação é conferida e a transferência é feita junto à administradora, com contrato formal." },
+    { icone: "📊", titulo: "Parcela sob medida", texto: "Ajudamos a encontrar uma carta com parcela compatível com sua renda antes de fechar negócio." },
+    { icone: "💬", titulo: "Suporte próximo", texto: "Time humano acompanha do primeiro contato até a entrega da carta — sem letra miúda." }
+  ],
+
+  // ---- Como funciona (passo a passo) ----
+  passosEyebrow: "Passo a passo",
+  passosTitulo: "Do primeiro contato até o crédito na sua mão.",
+  passosTexto: "Um processo enxuto, pensado para que você entenda cada etapa antes de decidir.",
+  passos: [
+    { titulo: "Simulação gratuita", texto: "Você conta o objetivo (imóvel, carro etc.) e a faixa de valor desejada." },
+    { titulo: "Escolha da carta", texto: "Apresentamos opções de cartas já contempladas compatíveis com seu perfil." },
+    { titulo: "Análise e aprovação", texto: "Conferimos documentação e condições junto à administradora responsável." },
+    { titulo: "Assinatura", texto: "Contrato formal de transferência, com todas as cláusulas explicadas." },
+    { titulo: "Uso do crédito", texto: "Carta liberada e pronta para uso na compra do seu bem." }
+  ],
+
+  // ---- Simulador ----
+  simEyebrow: "Simulação rápida",
+  simTitulo: "Veja uma estimativa em segundos.",
+  simTexto: "Ajuste o valor e o prazo para ter uma ideia da parcela. A simulação final é sempre confirmada com nosso time, conforme a carta disponível.",
+  simLabelValor: "Valor da carta desejada",
+  simLabelPrazo: "Prazo",
+  simLabelResultado: "Parcela estimada",
+  simCta: "Confirmar com um consultor",
+  simNota: "*Estimativa ilustrativa (inclui taxa de administração aproximada). Valores reais variam por administradora e carta disponível.",
+  simPrazos: [60, 96, 150, 200],       // meses disponíveis para escolha
+  simPrazoPadrao: 96,
+  simTaxaAdmAproximada: 0.18,          // 18% — só para efeito de estimativa
+
+  // ---- Depoimentos ----
+  depoEyebrow: "Quem já contemplou",
+  depoTitulo: "Histórias de quem usou a carta na hora certa.",
+  depoimentos: [
+    { texto: "Consegui a carta do meu apartamento em duas semanas, sem burocracia. Já estou com as chaves na mão.", nome: "Marina S.", categoria: "Carta de imóvel" },
+    { texto: "Troquei de carro sem financiamento e sem juros. O time explicou cada etapa antes de eu assinar.", nome: "Rafael T.", categoria: "Carta de veículo" },
+    { texto: "Achei que seria complicado, mas foi bem mais simples do que um financiamento tradicional.", nome: "Juliana P.", categoria: "Carta de serviços" }
+  ],
+
+  // ---- Perguntas frequentes ----
+  faqEyebrow: "Perguntas frequentes",
+  faqTitulo: "Tudo o que você precisa saber antes de decidir.",
+  faq: [
+    { pergunta: "O que é uma carta contemplada?", resposta: "É uma cota de consórcio que já foi sorteada ou deu lance vencedor. Quem assume a carta pode usar o crédito imediatamente, sem esperar novo sorteio." },
+    { pergunta: "É seguro transferir a carta?", resposta: "Sim. A transferência é feita formalmente junto à administradora do consórcio, com contrato assinado por ambas as partes." },
+    { pergunta: "Quanto tempo leva o processo?", resposta: "Depende da administradora, mas em geral o processo é concluído entre 7 e 20 dias após a aprovação da documentação." },
+    { pergunta: "Posso usar a carta para qualquer bem?", resposta: "Depende do grupo de consórcio (imóvel, veículo ou serviços). Ajudamos a encontrar a carta certa para o seu objetivo." },
+    { pergunta: "Tem taxa para falar com um consultor?", resposta: "Não. A simulação e a conversa inicial com nosso time são totalmente gratuitas e sem compromisso." }
+  ],
+
+  // ---- CTA final ----
+  ctaFinalEyebrow: "Pronto para contemplar?",
+  ctaFinalTitulo: "Fale agora com um consultor e receba sua simulação.",
+  ctaFinalTexto: "Sem compromisso. Você recebe as opções de carta disponíveis para o seu objetivo em poucos minutos.",
+  ctaFinalBotao1: "Falar no WhatsApp",
+  ctaFinalBotao2: "Ver no Instagram",
+
+  // ---- Faixa do Instagram ----
+  instaEyebrow: "@ no Instagram",
+  instaTitulo: "Acompanhe contemplações reais no nosso perfil.",
+  instaBotao: "Seguir no Instagram",
+  instaTiles: [
+    { emoji: "📷", legenda: "Contemplação" },
+    { emoji: "📷", legenda: "Depoimento" },
+    { emoji: "📷", legenda: "Carta liberada" },
+    { emoji: "📷", legenda: "Bastidores" }
+  ],
+
+  // ---- Rodapé ----
+  footerDescricao: "Conectamos você a cartas de consórcio já contempladas, com transparência e suporte em cada etapa.",
+  footerNavTitulo: "Navegação",
+  footerContatoTitulo: "Contato",
+  footerAviso: "Simulações têm caráter informativo e não constituem oferta vinculante."
+};
+
+/* =====================================================================
+   A partir daqui é só o motor que desenha a página usando o CONTEUDO
+   acima. Não precisa editar nada abaixo desta linha.
+   ===================================================================== */
+
+function formatarMoeda(v){
+  return v.toLocaleString('pt-BR', {style:'currency', currency:'BRL', maximumFractionDigits:0});
+}
+
+const linkWhatsapp = `https://wa.me/${CONTEUDO.whatsappNumero}?text=${encodeURIComponent(CONTEUDO.whatsappMensagem)}`;
+
+// Identidade
+document.getElementById('tituloAba').textContent = CONTEUDO.tituloAba;
+document.getElementById('logoIniciais').textContent = CONTEUDO.iniciaisLogo;
+document.getElementById('navNomeEmpresa').textContent = CONTEUDO.nomeEmpresa;
+document.getElementById('footerNome').textContent = CONTEUDO.nomeEmpresa;
+document.getElementById('footerDescricao').textContent = CONTEUDO.footerDescricao;
+document.getElementById('footerNavTitulo').textContent = CONTEUDO.footerNavTitulo;
+document.getElementById('footerContatoTitulo').textContent = CONTEUDO.footerContatoTitulo;
+document.getElementById('footerTelefone').textContent = CONTEUDO.telefoneExibicao;
+document.getElementById('footerEmail').textContent = CONTEUDO.emailExibicao;
+document.getElementById('footerAviso').textContent = CONTEUDO.footerAviso;
+document.getElementById('footerCopy').textContent = `© ${new Date().getFullYear()} ${CONTEUDO.nomeEmpresa}. Todos os direitos reservados.`;
+
+// Links de contato (WhatsApp / Instagram) em todos os pontos da página
+document.querySelectorAll('#linkWhatsappHeader,#linkWhatsappHero,#linkWhatsappSim,#linkWhatsappCta,#botaoFlutuante')
+  .forEach(el => el.href = linkWhatsapp);
+document.querySelectorAll('#linkInstagramCta,#linkInstagramStrip,#linkInstagramFooter')
+  .forEach(el => el.href = CONTEUDO.instagramUrl);
+
+// Hero
+document.getElementById('heroEyebrow').textContent = CONTEUDO.heroEyebrow;
+document.getElementById('heroTitulo').innerHTML = CONTEUDO.heroTituloHtml;
+document.getElementById('heroSubtitulo').textContent = CONTEUDO.heroSubtitulo;
+document.getElementById('linkWhatsappHero').textContent = CONTEUDO.heroCtaPrimario;
+document.getElementById('heroCtaSecundarioTexto').textContent = CONTEUDO.heroCtaSecundario;
+document.getElementById('heroStats').innerHTML = CONTEUDO.heroStats.map(s => `
+  <div class="stat"><b>${s.numero}</b><span>${s.legenda}</span></div>
+`).join('');
+
+// Carta ilustrativa
+document.getElementById('cartaLabel').textContent = CONTEUDO.carta.label;
+document.getElementById('cartaValor').textContent = CONTEUDO.carta.valor;
+document.getElementById('cartaSelo').textContent = CONTEUDO.carta.selo;
+document.getElementById('cartaLinha1Label').textContent = CONTEUDO.carta.linha1[0];
+document.getElementById('cartaLinha1Valor').textContent = CONTEUDO.carta.linha1[1];
+document.getElementById('cartaLinha2Label').textContent = CONTEUDO.carta.linha2[0];
+document.getElementById('cartaLinha2Valor').textContent = CONTEUDO.carta.linha2[1];
+document.getElementById('cartaLinha3Label').textContent = CONTEUDO.carta.linha3[0];
+document.getElementById('cartaLinha3Valor').textContent = CONTEUDO.carta.linha3[1];
+document.getElementById('cartaStatusTexto').textContent = CONTEUDO.carta.status;
+
+// Benefícios
+document.getElementById('beneficiosEyebrow').textContent = CONTEUDO.beneficiosEyebrow;
+document.getElementById('beneficiosTitulo').textContent = CONTEUDO.beneficiosTitulo;
+document.getElementById('beneficiosTexto').textContent = CONTEUDO.beneficiosTexto;
+document.getElementById('gridBeneficios').innerHTML = CONTEUDO.beneficios.map(b => `
+  <div class="card-beneficio">
+    <div class="icone-b">${b.icone}</div>
+    <h3>${b.titulo}</h3>
+    <p>${b.texto}</p>
+  </div>
+`).join('');
+
+// Como funciona
+document.getElementById('passosEyebrow').textContent = CONTEUDO.passosEyebrow;
+document.getElementById('passosTitulo').textContent = CONTEUDO.passosTitulo;
+document.getElementById('passosTexto').textContent = CONTEUDO.passosTexto;
+document.getElementById('gridPassos').innerHTML = CONTEUDO.passos.map((p, i) => `
+  <div class="passo">
+    <span class="passo-num">${String(i + 1).padStart(2, '0')}</span>
+    <h3>${p.titulo}</h3>
+    <p>${p.texto}</p>
+  </div>
+`).join('');
+
+// Simulador
+document.getElementById('simEyebrow').textContent = CONTEUDO.simEyebrow;
+document.getElementById('simTitulo').textContent = CONTEUDO.simTitulo;
+document.getElementById('simTexto').textContent = CONTEUDO.simTexto;
+document.getElementById('simLabelValor').textContent = CONTEUDO.simLabelValor;
+document.getElementById('simLabelPrazo').textContent = CONTEUDO.simLabelPrazo;
+document.getElementById('simLabelResultado').textContent = CONTEUDO.simLabelResultado;
+document.getElementById('simCtaTexto').textContent = CONTEUDO.simCta;
+document.getElementById('linkWhatsappSim').textContent = CONTEUDO.simCta;
+document.getElementById('simNota').textContent = CONTEUDO.simNota;
+
+const gridPrazos = document.getElementById('gridPrazos');
+gridPrazos.innerHTML = CONTEUDO.simPrazos.map(m => `
+  <button class="chip-prazo" data-prazo="${m}" aria-pressed="${m === CONTEUDO.simPrazoPadrao}">${m} meses</button>
+`).join('');
+
+let prazoAtual = CONTEUDO.simPrazoPadrao;
+const rangeValor = document.getElementById('rangeValor');
+const labelValor = document.getElementById('labelValor');
+const resultadoParcela = document.getElementById('resultadoParcela');
+
+function calcularSimulacao(){
+  const valor = Number(rangeValor.value);
+  labelValor.textContent = formatarMoeda(valor);
+  const parcela = (valor * (1 + CONTEUDO.simTaxaAdmAproximada)) / prazoAtual;
+  resultadoParcela.textContent = formatarMoeda(parcela);
+}
+
+rangeValor.addEventListener('input', calcularSimulacao);
+gridPrazos.querySelectorAll('.chip-prazo').forEach(chip => {
+  chip.addEventListener('click', () => {
+    gridPrazos.querySelectorAll('.chip-prazo').forEach(c => c.setAttribute('aria-pressed', 'false'));
+    chip.setAttribute('aria-pressed', 'true');
+    prazoAtual = Number(chip.dataset.prazo);
+    calcularSimulacao();
+  });
+});
+calcularSimulacao();
+
+// Depoimentos
+document.getElementById('depoEyebrow').textContent = CONTEUDO.depoEyebrow;
+document.getElementById('depoTitulo').textContent = CONTEUDO.depoTitulo;
+document.getElementById('gridDepoimentos').innerHTML = CONTEUDO.depoimentos.map(d => `
+  <div class="card-depo">
+    <div class="estrelas">★★★★★</div>
+    <p class="fala">"${d.texto}"</p>
+    <div class="depo-autor">
+      <div class="avatar-letra">${d.nome.charAt(0)}</div>
+      <div><b>${d.nome}</b><span>${d.categoria}</span></div>
+    </div>
+  </div>
+`).join('');
+
+// FAQ
+document.getElementById('faqEyebrow').textContent = CONTEUDO.faqEyebrow;
+document.getElementById('faqTitulo').textContent = CONTEUDO.faqTitulo;
+document.getElementById('listaFaq').innerHTML = CONTEUDO.faq.map(f => `
+  <div class="faq-item" data-aberto="false">
+    <button class="faq-pergunta">${f.pergunta} <span class="faq-plus">+</span></button>
+    <div class="faq-resposta"><p>${f.resposta}</p></div>
+  </div>
+`).join('');
+
+document.querySelectorAll('.faq-item').forEach(item => {
+  const btn = item.querySelector('.faq-pergunta');
+  const resp = item.querySelector('.faq-resposta');
+  btn.addEventListener('click', () => {
+    const aberto = item.getAttribute('data-aberto') === 'true';
+    document.querySelectorAll('.faq-item').forEach(other => {
+      other.setAttribute('data-aberto', 'false');
+      other.querySelector('.faq-resposta').style.maxHeight = null;
+    });
+    if (!aberto) {
+      item.setAttribute('data-aberto', 'true');
+      resp.style.maxHeight = resp.scrollHeight + 'px';
+    }
+  });
+});
+
+// CTA final
+document.getElementById('ctaFinalEyebrow').textContent = CONTEUDO.ctaFinalEyebrow;
+document.getElementById('ctaFinalTitulo').textContent = CONTEUDO.ctaFinalTitulo;
+document.getElementById('ctaFinalTexto').textContent = CONTEUDO.ctaFinalTexto;
+document.getElementById('linkWhatsappCta').textContent = CONTEUDO.ctaFinalBotao1;
+document.getElementById('linkInstagramCta').textContent = CONTEUDO.ctaFinalBotao2;
+
+// Faixa Instagram
+document.getElementById('instaEyebrow').textContent = CONTEUDO.instaEyebrow;
+document.getElementById('instaTitulo').textContent = CONTEUDO.instaTitulo;
+document.getElementById('instaBotao').textContent = CONTEUDO.instaBotao;
+document.getElementById('linkInstagramStrip').textContent = CONTEUDO.instaBotao;
+document.getElementById('gridInsta').innerHTML = CONTEUDO.instaTiles.map(t => `
+  <div class="insta-tile">${t.emoji}<span>${t.legenda}</span></div>
+`).join('');
+
+// Menu mobile
+const menuToggle = document.getElementById('menuToggle');
+const menuLinks = document.getElementById('menuLinks');
+menuToggle.addEventListener('click', () => {
+  const aberto = menuLinks.classList.toggle('aberto');
+  menuToggle.setAttribute('aria-expanded', aberto);
+});
+menuLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  menuLinks.classList.remove('aberto');
+  menuToggle.setAttribute('aria-expanded', 'false');
+}));
+</script>
+
+</body>
+</html>
